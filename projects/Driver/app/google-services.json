@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "550994583708",
+    "firebase_url": "https://facultydriver-default-rtdb.firebaseio.com",
+    "project_id": "facultydriver",
+    "storage_bucket": "facultydriver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550994583708:android:a4d5338651f9a7190e8d59",
+        "android_client_info": {
+          "package_name": "com.example.driver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw80Qv1pB5kgoxktYEX55s6BPApKjL5kg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

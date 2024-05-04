@@ -1,0 +1,15 @@
+<resources>
+
+    <style name="Widget.Theme.Driver.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+
+    </style>
+
+    <style name="Widget.Theme.Driver.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+
+
+    </style>
+
+
+</resources>
