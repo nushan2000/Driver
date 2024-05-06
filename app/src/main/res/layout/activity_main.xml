@@ -4,8 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#750B1E"
+    android:background="#F7D9C4"
+    app:circularflow_defaultRadius="10dp"
     tools:context=".MainActivity">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="412dp"
+        android:layout_height="66dp"
+        android:background="#F8E1D1"
+        android:elevation="100px"
+        app:flow_firstHorizontalBias="10"
+        app:flow_firstVerticalBias="10"
+        app:flow_horizontalBias="10"
+        app:flow_lastHorizontalBias="10"
+        app:flow_verticalBias="1"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.406" />
 
     <TextView
         android:id="@+id/textView3"
@@ -14,8 +33,9 @@
         android:layout_marginStart="144dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="36dp"
+        android:elevation="100dp"
         android:text="Faculty Reservation System"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,6 +47,7 @@
         android:layout_width="67dp"
         android:layout_height="100dp"
         android:layout_marginTop="32dp"
+        android:elevation="100dp"
         app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="Driver Name:"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#000000"
                     android:textSize="20sp" />
 
                 <TextView
@@ -75,7 +96,7 @@
                     android:layout_margin="5dp"
 
                     android:text="Vehicle:"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#000000"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toStartOf="@+id/textView"
                     app:layout_constraintStart_toStartOf="parent"
@@ -86,6 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:background="#E18C85"
                     android:text="LOGOUT" />
 
             </LinearLayout>
@@ -95,52 +117,53 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/logo3" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="381dp"
-        android:layout_height="210dp"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="412dp"
+        android:layout_height="314dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-        <Button
-            android:id="@+id/newButton"
-
-
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:layout_marginBottom="36dp"
-            android:shadowColor="#FFFFFF"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp">
 
-            android:shadowDx="1000"
-            android:shadowDy="1000"
-            android:text="New"
-            android:textSize="24sp"
-            app:cornerRadius="40dp"
-            app:icon="@drawable/ic_launcher_foreground"
-            app:iconTint="@color/light_blue_600"
-            app:rippleColor="@color/light_blue_600" />
+            <Button
+                android:id="@+id/newButton"
+                android:layout_width="250dp"
+                android:layout_height="65dp"
+                android:background="#5A3232"
+                android:text="New"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+        </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/insertButton"
-
-
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp">
 
-            android:background="#A62651"
-            android:text="Ongoine"
-            android:textSize="20sp"
-            app:cornerRadius="40dp" />
+            <Button
+                android:id="@+id/insertButton"
+                android:layout_width="250dp"
+                android:layout_height="65dp"
+                android:background="#5A3232"
+                android:text="Ongoing"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
