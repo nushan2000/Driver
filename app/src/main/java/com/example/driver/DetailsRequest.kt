@@ -45,8 +45,7 @@ class DetailsRequest : AppCompatActivity() {
         val requestReasonTextView = findViewById<TextView>(R.id.requestReasonTextView)
         requestReasonTextView.text = "Reason: $requestReason"
 
-        val requestDistanceTextView = findViewById<TextView>(R.id.requestDistanceTextView)
-        requestDistanceTextView.text = "Distance: $requestDistance"
+
 
         if (requestId.isNotEmpty()) {
             db = FirebaseFirestore.getInstance()

@@ -1,7 +1,5 @@
 package com.example.driver
 
-import java.util.Date
-
 data class Passenger(
     val name: String ,
     val position: String,
@@ -13,7 +11,7 @@ data class Passenger(
 }
 
 data class Request(
-    val id:String,
+    val id: String,
     val date: String,
     val startTime: String,
     val endTime: String,
@@ -23,14 +21,14 @@ data class Request(
     val departureLocation: String,
     val destination: String,
     val comeBack: Boolean,
-    val distance: String,
+    val distance: Double,  // Ensure this matches the type in Firestore
     val applier: String,
     val applyDate: String,
     val passengers: List<Passenger>
 ) {
     // No-argument constructor
     constructor() : this(
-"",
+        "",
         "",
         "",
         "",
@@ -40,7 +38,7 @@ data class Request(
         "",
         "",
         false,
-        "",
+        0.0,
         "",
         "",
         listOf()

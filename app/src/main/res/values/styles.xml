@@ -7,9 +7,14 @@
 
     <style name="Widget.Theme.Driver.ButtonBar.Fullscreen" parent="">
         <item name="android:background">@color/black_overlay</item>
-
+        <item name="colorControlNormal">#000000</item>
 
     </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
 
+        <!-- Customizing action bar items to be black -->
+        <item name="colorControlNormal">#000000</item>
+    </style>
 
 </resources>

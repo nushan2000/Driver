@@ -14,6 +14,7 @@ import com.google.firebase.firestore.ListenerRegistration
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         // Handle the incoming message here
@@ -26,6 +27,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             showNotification(title, body)
         }
     }
+
     private fun showNotification(title: String, body: String) {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationId = 1 // Unique ID for the notification

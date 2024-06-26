@@ -43,6 +43,7 @@ class AllRequest : AppCompatActivity() {
         // Initialize fusedLocationClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        // Initialize socket
         try {
             socket = IO.socket("http://your-backend-url:3000")
             socket.connect()
@@ -113,31 +114,35 @@ class AllRequest : AppCompatActivity() {
             .addOnSuccessListener { vehicleDocuments ->
                 if (!vehicleDocuments.isEmpty) {
                     val vehicleDocument = vehicleDocuments.documents[0]
-                    val vehicleName = vehicleDocument.getString("vehicle")
-                    Log.d(TAG, "Vehicle for logged-in driver $loggedInDriverEmail: $vehicleName")
+                    val vehicleName = vehicleDocument.getString("vehicleName")
+                    if (vehicleName != null) {
+                        Log.d(TAG, "Vehicle for logged-in driver $loggedInDriverEmail: $vehicleName")
 
-                    firestore.collection("Request")
-                        .whereEqualTo("vehicle", vehicleName)
-                        .whereEqualTo("approveDeenAr", true)
-                        .whereEqualTo("driverStatus", "notStart")
-                        .addSnapshotListener { value, error ->
-                            if (error != null) {
-                                Log.e(TAG, "Error getting documents", error)
-                                return@addSnapshotListener
-                            }
-
-                            if (value != null) {
+                        // Fetch requests for the specific vehicleName
+                        firestore.collection("Request")
+                            .whereEqualTo("vehicle", vehicleName)  // Adjusted to match your data structure
+                            .whereEqualTo("approveDeenAr", true)
+                            .whereEqualTo("driverStatus", "approved")
+                            .get()
+                            .addOnSuccessListener { requestDocuments ->
                                 requestList.clear()
-                                for (doc in value.documents) {
-                                    val request = doc.toObject(Request::class.java)
-                                    request?.let { requestList.add(it) }
+                                for (doc in requestDocuments) {
+                                    try {
+                                        val request = doc.toObject(Request::class.java)
+                                        request?.let { requestList.add(it) }
+                                    } catch (e: Exception) {
+                                        Log.e(TAG, "Error deserializing document", e)
+                                    }
                                 }
                                 requestAdapter.notifyDataSetChanged()
                                 Log.d(TAG, "Received ${requestList.size} documents from Firestore")
-                            } else {
-                                Log.d(TAG, "No documents found")
                             }
-                        }
+                            .addOnFailureListener { exception ->
+                                Log.e(TAG, "Error getting requests: ", exception)
+                            }
+                    } else {
+                        Log.e(TAG, "Vehicle name is null for driver: $loggedInDriverEmail")
+                    }
                 } else {
                     Log.e(TAG, "No vehicle found for driver: $loggedInDriverEmail")
                 }
@@ -145,6 +150,8 @@ class AllRequest : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.e(TAG, "Error getting vehicle: ", exception)
             }
+
+
     }
 
     private fun sendLocationUpdates(latitude: Double, longitude: Double) {

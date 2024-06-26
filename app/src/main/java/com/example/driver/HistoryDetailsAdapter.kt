@@ -24,7 +24,7 @@ class HistoryDetailsAdapter(private val requestList: MutableList<Request>) : Rec
         val request = requestList[position]
         holder.textViewTitle.text = request.reason
         holder.textViewName.text = request.applier
-        holder.textViewModel.text = request.vehicle
+        holder.textViewModel.text = request.date
 
     }
 

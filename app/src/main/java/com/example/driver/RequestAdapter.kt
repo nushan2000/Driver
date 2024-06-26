@@ -56,7 +56,7 @@ class RequestAdapter(
         val request = requestList[position]
         holder.textViewTitle.text = request.reason
         holder.textViewName.text = request.applier
-        holder.textViewModel.text = request.vehicle
+        holder.textViewModel.text = request.date
 
         holder.buttonStart.setOnClickListener {
             Log.d(TAG, "Start button clicked")

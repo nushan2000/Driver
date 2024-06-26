@@ -14,6 +14,7 @@
         android:layout_marginTop="72dp"
         android:text="Request ID:"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,19 +28,7 @@
         android:layout_marginTop="24dp"
         android:text="Reason:"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/requestIdTextView" />
-
-    <TextView
-        android:id="@+id/requestDistanceTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/requestReasonTextView"
-        android:layout_marginTop="76dp"
-        android:text="Distance:"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +39,9 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="280dp"
+        android:background="#FF9800"
         android:text="Finish"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/requestReasonTextView" />

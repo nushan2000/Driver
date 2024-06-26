@@ -1,6 +1,7 @@
 package com.example.driver
 
 import RequestAdapterHistory
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -46,42 +47,43 @@ class History : AppCompatActivity() {
             .addOnSuccessListener { vehicleDocuments ->
                 if (!vehicleDocuments.isEmpty) {
                     val vehicleDocument = vehicleDocuments.documents[0]
-                    val vehicleName = vehicleDocument.getString("vehicle")
-                    Log.d("Firestore", "Vehicle for logged-in driver $loggedInDriverEmail: $vehicleName")
-                    // Query Firestore for requests associated with the retrieved vehicle
+                    val vehicleName = vehicleDocument.getString("vehicleName")
+                    if (vehicleName != null) {
+                        Log.d(TAG, "Vehicle for logged-in driver $loggedInDriverEmail: $vehicleName")
 
-                    firestore.collection("Request")
-            .whereEqualTo("approveDeenAr", true)
-            .whereEqualTo("driverStatus", "start")
-            .addSnapshotListener { value, error ->
-                if (error != null) {
-                    Log.e("Firestore", "Error getting documents", error)
-                    return@addSnapshotListener
-                }
-
-                if (value != null) {
-                    requestList.clear()
-                    for (doc in value.documents) {
-                        val request = doc.toObject(Request::class.java)
-                        request?.let { requestList.add(it) }
-                    }
-                    requestAdapter.notifyDataSetChanged()
-                    Log.d("Firestore", "Received ${requestList.size} documents from Firestore")
-
-                    // Log the data for debugging purposes
-                    for (request in requestList) {
-                        Log.d("Firestore", "Request: $request")
+                        // Fetch requests for the specific vehicleName
+                        firestore.collection("Request")
+                            .whereEqualTo("vehicle", vehicleName)  // Adjusted to match your data structure
+                            .whereEqualTo("approveDeenAr", true)
+                            .whereEqualTo("driverStatus", "start")
+                            .get()
+                            .addOnSuccessListener { requestDocuments ->
+                                requestList.clear()
+                                for (doc in requestDocuments) {
+                                    try {
+                                        val request = doc.toObject(Request::class.java)
+                                        request?.let { requestList.add(it) }
+                                    } catch (e: Exception) {
+                                        Log.e(TAG, "Error deserializing document", e)
+                                    }
+                                }
+                                requestAdapter.notifyDataSetChanged()
+                                Log.d(TAG, "Received ${requestList.size} documents from Firestore")
+                            }
+                            .addOnFailureListener { exception ->
+                                Log.e(TAG, "Error getting requests: ", exception)
+                            }
+                    } else {
+                        Log.e(TAG, "Vehicle name is null for driver: $loggedInDriverEmail")
                     }
                 } else {
-                    Log.d("Firestore", "No documents found")
-                }
-            }} else {
-                    Log.e("Firestore", "No vehicle found for driver: $loggedInDriverEmail")
+                    Log.e(TAG, "No vehicle found for driver: $loggedInDriverEmail")
                 }
             }
             .addOnFailureListener { exception ->
-                Log.e("Firestore", "Error getting vehicle: ", exception)
+                Log.e(TAG, "Error getting vehicle: ", exception)
             }
+
         val historyDetailbutton = findViewById<Button>(R.id.historyDetailbutton)
         historyDetailbutton.setOnClickListener {
 
